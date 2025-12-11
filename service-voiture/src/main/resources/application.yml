@@ -1,0 +1,32 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: SERVICE-VOITURE
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: SERVICE-VOITURE
+        health-check-interval: 10s
+        instance-id: ${spring.application.name}:${server.port}
+        prefer-ip-address: true
+
+# Configuration Eureka (Desactivee)
+# eureka:
+#   client:
+#     service-url:
+#       defaultZone: http://localhost:8761/eureka
+
+# Configuration Consul (Desactivee)
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
